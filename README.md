@@ -25,7 +25,7 @@ A from-scratch deep learning pipeline for 3-class sentiment classification of **
 
 ## Overview
 
-The dataset is the [Twitter US Airline Sentiment](https://www.kaggle.com/datasets/crowdflower/twitter-airline-sentiment) corpus from Kaggle. It contains tweets labelled as **Negative** (~63%), **Neutral** (~21%), or **Positive** (~16%), making it a strongly imbalanced multi-class classification problem. Before tokenisation, each tweet is pre-processed to remove URLs, user mentions (`@handle`), and special characters, retaining only the clean linguistic content. The goal is to correctly identify sentiment even for the minority class, using a lightweight recurrent architecture that generalises well on short, noisy social media text.
+The dataset `kaggle_dataset_clean.csv`  is a custom, pre-processed version of the [Twitter US Airline Sentiment](https://www.kaggle.com/datasets/crowdflower/twitter-airline-sentiment) corpus from Kaggle. It contains tweets labelled as **Negative** (~63%), **Neutral** (~21%), or **Positive** (~16%), making it a strongly imbalanced multi-class classification problem. To ensure optimal modeling, the raw data was processed via a dedicated cleaning script `clean_dataset.py` to remove URLs, user mentions (`@handle`), and special characters, retaining only the pure linguistic content. The goal is to correctly identify sentiment even for the minority class, using a lightweight recurrent architecture that generalises well on short, noisy social media text.
 
 **Key design principles:**
 - Full determinism and reproducibility via a centralised `set_seed` function
@@ -93,10 +93,10 @@ conda activate sentiment_env
 
 ```bash
 # Option A — Jupyter
-jupyter notebook notebook/sentiment_bilstm.ipynb
+jupyter notebook notebook/sentiment_analysis.ipynb
 
 # Option B — VS Code
-code notebook/sentiment_bilstm.ipynb
+code notebook/sentiment_analysis.ipynb
 ```
 
 3. **Execute all cells in sequence** from top to bottom. The notebook is structured as a self-contained pipeline:
@@ -272,8 +272,10 @@ The Positive class, despite being the smallest, achieves an F1 of 0.68, confirmi
 ├── images/
 │   ├── validation_f1_comparison.png
 │   └── confusion_matrix_best_model.png
-├── data/
-│   └── Tweets.csv               # Source dataset (US Airline Sentiment, Kaggle)
+├── kaggle_dataset_clean.csv
+├── clean_dataset.py                 # Script used for text cleaning and preprocessing
+├── requirements.txt                 # Project dependencies
+├── .gitignore                       # Git ignore rules
 └── README.md
 ```
 
